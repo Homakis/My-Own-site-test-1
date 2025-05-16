@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Trivia / Quiz</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1a0033, #32004d);
+      color: #fff;
+      padding: 0;
+      margin: 0;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-areas: "menu quiz";
+      grid-template-columns: 220px 1fr;
+      min-height: 100vh;
+      gap: 20px;
+      padding: 40px;
+    }
+
+    .side-menu {
+      grid-area: menu;
+      background-color: rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .side-menu h2 a, .side-menu a {
+      color: #6feb3e;
+      text-decoration: none;
+    }
+
+    .side-menu ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .side-menu li {
+      margin: 10px 0;
+    }
+
+    .quiz-content {
+      grid-area: quiz;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    fieldset {
+      border: 2px solid #6feb3e;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    legend {
+      font-size: 18px;
+      padding: 0 10px;
+      font-weight: bold;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    button {
+      background-color: #6feb3e;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .result {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <div class="side-menu">
+      <h2><a href="../index.html">Guides</a></h2>
+      <ul>
+        <li><a href="../index.html">Main</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="videos.html">Videos</a></li>
+        <li><a href="Trivia_Quiz.html" class="active">Trivia / Quiz</a></li>
+      </ul>
+    </div>
+
+    <div class="quiz-content">
+      <form id="quizForm">
+        <fieldset>
+          <legend>1. Which attribute type does Ogre Magi belong to?</legend>
+          <label><input type="radio" name="q1" value="strength"> Strength</label>
+          <label><input type="radio" name="q1" value="agility"> Agility</label>
+          <label><input type="radio" name="q1" value="intelligence"> Intelligence</label>
+          <label><input type="radio" name="q1" value="universal"> Universal</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>2. What is the max hero level in Dota 1x6?</legend>
+          <label><input type="radio" name="q2" value="25"> 25</label>
+          <label><input type="radio" name="q2" value="30"> 30</label>
+          <label><input type="radio" name="q2" value="40"> 40</label>
+          <label><input type="radio" name="q2" value="50"> 50</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>3. What makes Universal heroes unique?</legend>
+          <label><input type="radio" name="q3" value="AllAttributes"> They benefit from all attributes equally</label>
+          <label><input type="radio" name="q3" value="NoUltimate"> They have no ultimate ability</label>
+          <label><input type="radio" name="q3" value="RandomSkills"> Their skills are random</label>
+          <label><input type="radio" name="q3" value="DoubleXP"> They gain double XP</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>4. What item provides Spell Lifesteal?</legend>
+          <label><input type="radio" name="q4" value="Bloodstone"> Bloodstone</label>
+          <label><input type="radio" name="q4" value="BlackKingBar"> Black King Bar</label>
+          <label><input type="radio" name="q4" value="BlinkDagger"> Blink Dagger</label>
+          <label><input type="radio" name="q4" value="Desolator"> Desolator</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>5. What item allows you to become spell immune for a short duration?</legend>
+          <label><input type="radio" name="q5" value="BlackKingBar"> Black King Bar</label>
+          <label><input type="radio" name="q5" value="MantaStyle"> Manta Style</label>
+          <label><input type="radio" name="q5" value="Aghanim"> Aghanim's Scepter</label>
+          <label><input type="radio" name="q5" value="Dagon"> Dagon</label>
+        </fieldset>
+
+        <button type="button" onclick="checkAnswers()">Submit Answers</button>
+      </form>
+
+      <div class="result" id="resultBox"></div>
+    </div>
+  </div>
+
+  <script>
+    function checkAnswers() {
+      const answers = {
+        q1: "strength",
+        q2: "30",
+        q3: "AllAttributes",
+        q4: "Bloodstone",
+        q5: "BlackKingBar"
+      };
+
+      let score = 0;
+      let total = Object.keys(answers).length;
+
+      for (let key in answers) {
+        const selected = document.querySelector(`input[name="${key}"]:checked`);
+        if (selected && selected.value === answers[key]) {
+          score++;
+        }
+      }
+
+      document.getElementById("resultBox").innerText = `You got ${score} out of ${total} correct!`;
+    }
+  </script>
+</body>
+</html>
